@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link as ReactRouterLink } from 'react-router-dom'
 import {
+  Avatar,
   Box,
   Flex,
   HStack,
@@ -65,6 +66,13 @@ function Nav() {
                   textDecoration: 'none',
                 }}
               >
+                <Avatar
+                  size={'md'}
+                  src={'./gl_icon.png'}
+                  me={2}
+
+
+                />
                 Green Lake Pickleball
               </Link>
             </Box>
