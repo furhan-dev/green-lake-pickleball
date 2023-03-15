@@ -1,15 +1,16 @@
 import React from 'react'
 import { Link as ReactRouterLink } from 'react-router-dom'
 import {
-  Avatar,
   Box,
   Flex,
   HStack,
   Link,
   IconButton,
+  Image,
   useDisclosure,
   useColorModeValue,
   Stack,
+  Text,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 
@@ -56,8 +57,8 @@ function Nav() {
             <Box
               color={'white'}
               fontWeight={700}
-              fontSize={'3xl'}
-              pe={4}
+              fontSize={'2xl'}
+              pe={6}
             >
               <Link
                 as={ReactRouterLink}
@@ -66,14 +67,15 @@ function Nav() {
                   textDecoration: 'none',
                 }}
               >
-                <Avatar
-                  size={'md'}
-                  src={'./gl_icon.png'}
-                  me={2}
-
-
-                />
-                Green Lake Pickleball
+                <HStack>
+                  <Image
+                    boxSize='40px'
+                    objectFit='cover'
+                    src='./gl_icon.png'
+                    alt='Green Lake Logo'
+                  />
+                  <Text>Green Lake Pickleball</Text>
+                </HStack>
               </Link>
             </Box>
             <HStack
