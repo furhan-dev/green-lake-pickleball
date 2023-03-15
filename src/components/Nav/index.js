@@ -59,7 +59,6 @@ function Nav() {
               <Box
                 color={'white'}
                 fontWeight={700}
-                fontSize={'2xl'}
                 pe={6}
               >
                 <Link
@@ -76,7 +75,7 @@ function Nav() {
                       src='./gl_icon.png'
                       alt='Green Lake Logo'
                     />
-                    <Text>Green Lake Pickleball</Text>
+                    <Text fontSize={{ base: '20px', md: '2xl' }}>Green Lake Pickleball</Text>
                   </HStack>
                 </Link>
               </Box>
