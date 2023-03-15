@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import { Box } from '@chakra-ui/react'
 
 function Home(props) {
@@ -8,6 +8,6 @@ function Home(props) {
   )
 }
 
-Home.propTypes = {}
+// Home.propTypes = {}
 
 export default Home

@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import { Box } from '@chakra-ui/react'
 
 function Schedule(props) {
@@ -8,6 +8,6 @@ function Schedule(props) {
   )
 }
 
-Schedule.propTypes = {}
+// Schedule.propTypes = {}
 
 export default Schedule

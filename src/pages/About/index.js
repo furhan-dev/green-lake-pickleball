@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import { Box } from '@chakra-ui/react'
 
 function About(props) {
@@ -8,6 +8,6 @@ function About(props) {
   )
 }
 
-About.propTypes = {}
+// About.propTypes = {}
 
 export default About
