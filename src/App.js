@@ -4,17 +4,19 @@ import Home from './pages/Home';
 import Schedule from './pages/Schedule';
 import About from './pages/About';
 import Nav from './components/Nav'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, Container } from '@chakra-ui/react'
 
 function App() {
   return (
     <ChakraProvider>
       <Nav />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/schedule" element={<Schedule />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
+      <Container maxW={'container.md'} p={4}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/schedule" element={<Schedule />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </Container>
     </ChakraProvider>
   );
 }

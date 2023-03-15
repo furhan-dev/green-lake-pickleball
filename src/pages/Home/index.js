@@ -1,11 +1,16 @@
 import React from 'react'
-import { Container } from '@chakra-ui/react'
+import { Stack } from '@chakra-ui/react'
+import Intro from '../../components/Intro'
+import News from '../../components/News'
+import Weather from '../../components/Weather'
 
 function Home(props) {
   return (
-    <Container p={4} maxW={'container.md'}>
-      Home
-    </Container>
+    <Stack>
+      <Intro />
+      <News />
+      <Weather />
+    </Stack>
   )
 }
 
