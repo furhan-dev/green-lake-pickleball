@@ -2,6 +2,7 @@ import React from 'react'
 import { Link as ReactRouterLink } from 'react-router-dom'
 import {
   Box,
+  Container,
   Flex,
   HStack,
   Link,
@@ -41,63 +42,65 @@ function Nav() {
   return (
     <>
       <Box bg={useColorModeValue('forestgreen', 'green.900')} px={4} color={'white'} fontFamily={'Lato, sans-serif'} fontWeight={400}>
-        <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-          <IconButton
-            size={'md'}
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={'Open Menu'}
-            display={{ md: 'none' }}
-            onClick={isOpen ? onClose : onOpen}
-            bg={'forestgreen'}
-            _hover={{
-              bg: 'green.700'
-            }}
-          />
-          <HStack spacing={8} alignItems={'center'}>
-            <Box
-              color={'white'}
-              fontWeight={700}
-              fontSize={'2xl'}
-              pe={6}
-            >
-              <Link
-                as={ReactRouterLink}
-                to={'/'}
-                _hover={{
-                  textDecoration: 'none',
-                }}
+        <Container maxW={'container.md'}>
+          <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+            <IconButton
+              size={'md'}
+              icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+              aria-label={'Open Menu'}
+              display={{ md: 'none' }}
+              onClick={isOpen ? onClose : onOpen}
+              bg={'forestgreen'}
+              _hover={{
+                bg: 'green.700'
+              }}
+            />
+            <HStack spacing={8} alignItems={'center'}>
+              <Box
+                color={'white'}
+                fontWeight={700}
+                fontSize={'2xl'}
+                pe={6}
               >
-                <HStack>
-                  <Image
-                    boxSize='40px'
-                    objectFit='cover'
-                    src='./gl_icon.png'
-                    alt='Green Lake Logo'
-                  />
-                  <Text>Green Lake Pickleball</Text>
-                </HStack>
-              </Link>
-            </Box>
-            <HStack
-              as={'nav'}
-              spacing={4}
-              display={{ base: 'none', md: 'flex' }}>
-              {Links.map((link) => (
-                <NavLink key={link.name} name={link.name} path={link.path}></NavLink>
-              ))}
+                <Link
+                  as={ReactRouterLink}
+                  to={'/'}
+                  _hover={{
+                    textDecoration: 'none',
+                  }}
+                >
+                  <HStack>
+                    <Image
+                      boxSize='40px'
+                      objectFit='cover'
+                      src='./gl_icon.png'
+                      alt='Green Lake Logo'
+                    />
+                    <Text>Green Lake Pickleball</Text>
+                  </HStack>
+                </Link>
+              </Box>
+              <HStack
+                as={'nav'}
+                spacing={4}
+                display={{ base: 'none', md: 'flex' }}>
+                {Links.map((link) => (
+                  <NavLink key={link.name} name={link.name} path={link.path}></NavLink>
+                ))}
+              </HStack>
             </HStack>
-          </HStack>
-        </Flex>
+          </Flex>
 
-        {isOpen ? (
-          <Box pb={4} display={{ md: 'none' }}>
-            <Stack as={'nav'} spacing={4}>
-              {Links.map((link) => (
-                <NavLink key={link.name} name={link.name} path={link.path}></NavLink>
-              ))}
-            </Stack>
-          </Box>
-        ) : null}
+          {isOpen ? (
+            <Box pb={4} display={{ md: 'none' }}>
+              <Stack as={'nav'} spacing={4}>
+                {Links.map((link) => (
+                  <NavLink key={link.name} name={link.name} path={link.path}></NavLink>
+                ))}
+              </Stack>
+            </Box>
+          ) : null}
+        </Container>
       </Box>
     </>
   );
