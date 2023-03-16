@@ -56,6 +56,7 @@ function Nav({ forecast, isLoading, hasError }) {
               size={'md'}
               icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
               aria-label={'Open Menu'}
+              display={{ md: 'none' }}
               onClick={isOpen ? onClose : onOpen}
               bg={'forestgreen'}
               _hover={{
