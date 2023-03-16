@@ -34,9 +34,11 @@ function NavWeather({ forecast, isLoading, hasError }) {
           Loading...
         </Text>
       ) : (
-        <Text ms={'1 !important'} fontSize={'xs'}>
-          N/A
-        </Text>
+        <Show breakpoint="(min-width: 400px)">
+          <Text ms={'1 !important'} fontSize={'xs'}>
+            N/A
+          </Text>
+        </Show>
       )}
     </HStack>
   );
