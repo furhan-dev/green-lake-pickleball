@@ -30,12 +30,12 @@ function NavWeather({ forecast, isLoading, hasError }) {
           </Text>
         </>
       ) : isLoading ? (
-        <Text ms={'0 !important'} fontSize={'xx-small'}>
+        <Text ms={'1 !important'} fontSize={'xs'}>
           Loading...
         </Text>
       ) : (
-        <Text ms={'0 !important'} fontSize={'xx-small'}>
-          Has Error!
+        <Text ms={'1 !important'} fontSize={'xs'}>
+          N/A
         </Text>
       )}
     </HStack>
