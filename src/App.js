@@ -13,7 +13,7 @@ function App() {
   const [hasError, setHasError] = useState(false);
   useEffect(() => {
     fetch(
-      'http://api.weatherapi.com/v1/forecast.json?key=0609788c068c444ea33232335231503&q=47.68167524285481,-122.32830287086277&days=3&aqi=yes&alerts=no'
+      `http://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=47.68167524285481,-122.32830287086277&days=3&aqi=yes&alerts=no`
     )
       .then((response) => response.json())
       .then(
