@@ -26,7 +26,7 @@ function NavWeather({ forecast, isLoading, hasError }) {
             alt="Green Lake Logo"
           />
           <Text ms={'-1 !important'} fontSize={'xs'}>
-            {currentConditions.current.temp_f}℉
+            {Math.round(currentConditions.current.temp_f)}℉
           </Text>
         </>
       ) : isLoading ? (
