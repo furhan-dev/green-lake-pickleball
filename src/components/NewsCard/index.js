@@ -21,7 +21,7 @@ function NewsCard({ id, date, author, title, content, fullPost }) {
   };
   return (
     <Card maxW="container.md">
-      <CardHeader bg={"whitesmoke"} borderTopRadius={"lg"} py={2}>
+      <CardHeader bg={"whitesmoke"} borderTopRadius={"lg"} pt={1} pb={2}>
         <Flex
           flex="1"
           gap="4"
@@ -29,27 +29,27 @@ function NewsCard({ id, date, author, title, content, fullPost }) {
           align={"center"}
           flexWrap="wrap"
           fontSize={"xs"}
-          mb={0}
+          mb={1}
         >
-          <Text color="gray.700">{formatDate(date)}</Text>
+          <Text color="gray.800">{formatDate(date)}</Text>
           <HStack>
             <Avatar
               size={"xs"}
               name={author}
               src={`/${author.replace(/ /g, "").toLowerCase()}-avatar.png`}
             />
-            <Text color="gray.700">{author}</Text>
+            <Text color="gray.800">{author}</Text>
           </HStack>
         </Flex>
         {fullPost ? (
-          <Heading size="md">{title}</Heading>
+          <Heading size="sm">{title}</Heading>
         ) : (
-          <Heading size="md" noOfLines={1}>
+          <Heading size="sm" noOfLines={1}>
             {title}
           </Heading>
         )}
       </CardHeader>
-      <CardBody>
+      <CardBody fontSize={"sm"}>
         {fullPost ? (
           <Text>{content}</Text>
         ) : (
