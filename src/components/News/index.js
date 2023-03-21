@@ -8,6 +8,7 @@ import {
   query,
   deleteDoc,
   doc,
+  limit,
 } from "firebase/firestore";
 import { Heading, SimpleGrid, Text } from "@chakra-ui/react";
 import db from "./../../db";
@@ -21,7 +22,7 @@ function News() {
   useEffect(() => {
     const newsQuery = query(
       collection(db, "latest-news"),
-      orderBy("date", "desc")
+      orderBy("date", "desc", limit(5))
     );
     const unsubscribe = onSnapshot(
       newsQuery,

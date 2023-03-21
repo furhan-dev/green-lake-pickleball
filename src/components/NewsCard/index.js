@@ -2,7 +2,7 @@ import React from "react";
 import { DateTime } from "luxon";
 import {
   Avatar,
-  Box,
+  Button,
   Card,
   CardBody,
   CardFooter,
@@ -14,6 +14,7 @@ import {
   Text,
   Center,
 } from "@chakra-ui/react";
+import { color } from "framer-motion";
 
 function NewsCard({ id, date, author, title, content }) {
   const formatDate = (date) => {
@@ -21,30 +22,29 @@ function NewsCard({ id, date, author, title, content }) {
   };
   return (
     <Card maxW="container.md">
-      <CardHeader>
-        <Flex spacing="4">
-          <Flex
-            flex="1"
-            gap="4"
-            justifyContent={"space-between"}
-            flexWrap="wrap"
-            fontSize={"small"}
-            color="GrayText"
-          >
-            <Text fontSize="small" color="GrayText">
-              {formatDate(date)}
-            </Text>
-            <HStack>
-              <Avatar
-                size={"xs"}
-                name="Peter Seitel"
-                src={`${author.replace(/ /g, "")}-avatar.png`}
-              />
-              <Text>{author}</Text>
-            </HStack>
-          </Flex>
+      <CardHeader bg={"whitesmoke"} borderTopRadius={"lg"} pt={2}>
+        <Flex
+          flex="1"
+          gap="4"
+          justifyContent={"space-between"}
+          align={"center"}
+          flexWrap="wrap"
+          fontSize={"xs"}
+          mb={1}
+        >
+          <Text fontSize="small" color="gray.700">
+            {formatDate(date)}
+          </Text>
+          <HStack>
+            <Avatar
+              size={"sm"}
+              name="Peter Seitel"
+              src={`${author.replace(/ /g, "")}-avatar.png`}
+            />
+            <Text color="gray.700">{author}</Text>
+          </HStack>
         </Flex>
-        <Heading size="sm" noOfLines={1}>
+        <Heading size="md" noOfLines={1}>
           {title}
         </Heading>
       </CardHeader>
@@ -52,24 +52,8 @@ function NewsCard({ id, date, author, title, content }) {
         <Text noOfLines={3}>{content}</Text>
       </CardBody>
 
-      <CardFooter
-        justify="space-between"
-        flexWrap="wrap"
-        sx={{
-          "& > button": {
-            minW: "136px",
-          },
-        }}
-      >
-        {/* <Button flex="1" variant="ghost" leftIcon={<BiLike />}>
-          Like
-        </Button>
-        <Button flex="1" variant="ghost" leftIcon={<BiChat />}>
-          Comment
-        </Button>
-        <Button flex="1" variant="ghost" leftIcon={<BiShare />}>
-          Share
-        </Button> */}
+      <CardFooter justify="flex-end" flexWrap="wrap">
+        <Button bg={"whitesmoke"}>Read Full Post</Button>
       </CardFooter>
     </Card>
   );
