@@ -1,11 +1,11 @@
-import './App.css';
-import React, { useState, useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
-import Schedule from './pages/Schedule';
-import About from './pages/About';
-import Nav from './components/Nav';
-import { ChakraProvider, Container } from '@chakra-ui/react';
+import "./App.css";
+import React, { useState, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Schedule from "./pages/Schedule";
+import About from "./pages/About";
+import Nav from "./components/Nav";
+import { ChakraProvider, Container } from "@chakra-ui/react";
 
 function App() {
   const [forecast, setForecast] = useState(undefined);
@@ -33,7 +33,7 @@ function App() {
   return (
     <ChakraProvider>
       <Nav forecast={forecast} isLoading={isLoading} hasError={hasError} />
-      <Container maxW={'container.md'} p={4}>
+      <Container maxW={"container.md"} p={4}>
         <Routes>
           <Route
             path="/"
