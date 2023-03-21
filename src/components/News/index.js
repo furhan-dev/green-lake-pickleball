@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import {
   collection,
-  getDocs,
   onSnapshot,
   orderBy,
   query,
-  deleteDoc,
-  doc,
   limit,
 } from "firebase/firestore";
 import { Heading, SimpleGrid, Text } from "@chakra-ui/react";
@@ -64,8 +60,10 @@ function News() {
           })
         ) : isLoading ? (
           <Text m={3}>Loading...</Text>
-        ) : (
+        ) : hasError ? (
           <Text>N/A</Text>
+        ) : (
+          <></>
         )}
       </SimpleGrid>
     </div>
