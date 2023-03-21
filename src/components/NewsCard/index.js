@@ -36,7 +36,7 @@ function NewsCard({ id, date, author, title, content, fullPost }) {
             <Avatar
               size={"xs"}
               name={author}
-              src={`/${author.replace(/ /g, "")}-avatar.png`}
+              src={`/${author.replace(/ /g, "").toLowerCase()}-avatar.png`}
             />
             <Text color="gray.700">{author}</Text>
           </HStack>
