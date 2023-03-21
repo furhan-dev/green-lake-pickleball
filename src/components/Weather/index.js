@@ -13,7 +13,6 @@ function Weather({ forecast, isLoading, hasError }) {
       <Heading as="h4" size="md" mb={2}>
         Weather Forecast
       </Heading>
-      {/* <HStack spacing={8} alignItems={'center'}> */}
       <SimpleGrid
         spacing={4}
         templateColumns="repeat(auto-fill, minmax(200px, 1fr))"

@@ -5,9 +5,11 @@ import Home from "./pages/Home";
 import Schedule from "./pages/Schedule";
 import About from "./pages/About";
 import Nav from "./components/Nav";
+import db from "./db";
 import { ChakraProvider, Container } from "@chakra-ui/react";
 
 function App() {
+  console.log(db);
   const [forecast, setForecast] = useState(undefined);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
