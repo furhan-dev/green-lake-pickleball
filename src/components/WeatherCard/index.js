@@ -25,7 +25,7 @@ function WeatherCard({ day }) {
       </Stack>
     );
   };
-  return day ? (
+  return (
     <Card align={"center"}>
       <CardHeader pb={"2"}>
         <Stack spacing="3" direction={"row"} alignItems={"center"}>
@@ -51,8 +51,6 @@ function WeatherCard({ day }) {
         </Stack>
       </CardBody>
     </Card>
-  ) : (
-    <></>
   );
 }
 

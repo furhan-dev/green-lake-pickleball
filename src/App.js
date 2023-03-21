@@ -4,10 +4,13 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Schedule from "./pages/Schedule";
 import About from "./pages/About";
+import News from "./pages/News";
 import Nav from "./components/Nav";
+import db from "./db";
 import { ChakraProvider, Container } from "@chakra-ui/react";
 
 function App() {
+  console.log(db);
   const [forecast, setForecast] = useState(undefined);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
@@ -18,7 +21,6 @@ function App() {
       .then((response) => response.json())
       .then(
         (data) => {
-          console.log(data);
           setForecast(data);
           setIsLoading(false);
         },
@@ -47,7 +49,7 @@ function App() {
           />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/about" element={<About />} />
-          {/* <Route path="/news/:id" element={<News />} /> */}
+          <Route path="/news/:id" element={<News />} />
         </Routes>
       </Container>
     </ChakraProvider>
