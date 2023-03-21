@@ -50,7 +50,6 @@ function News() {
       >
         {news ? (
           news.map((post, index) => {
-            console.log(post);
             return (
               <NewsCard
                 key={index}
@@ -59,6 +58,7 @@ function News() {
                 author={post.data().author}
                 title={post.data().title}
                 content={post.data().content}
+                fullPost={false}
               ></NewsCard>
             );
           })

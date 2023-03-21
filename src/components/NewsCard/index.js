@@ -1,4 +1,5 @@
 import React from "react";
+import { Link as ReactRouterLink } from "react-router-dom";
 import { DateTime } from "luxon";
 import {
   Avatar,
@@ -10,19 +11,17 @@ import {
   Flex,
   Heading,
   HStack,
-  Image,
+  Link,
   Text,
-  Center,
 } from "@chakra-ui/react";
-import { color } from "framer-motion";
 
-function NewsCard({ id, date, author, title, content }) {
+function NewsCard({ id, date, author, title, content, fullPost }) {
   const formatDate = (date) => {
     return DateTime.fromJSDate(date).toLocaleString({ dateStyle: "full" });
   };
   return (
     <Card maxW="container.md">
-      <CardHeader bg={"whitesmoke"} borderTopRadius={"lg"} pt={2}>
+      <CardHeader bg={"whitesmoke"} borderTopRadius={"lg"} py={2}>
         <Flex
           flex="1"
           gap="4"
@@ -30,30 +29,56 @@ function NewsCard({ id, date, author, title, content }) {
           align={"center"}
           flexWrap="wrap"
           fontSize={"xs"}
-          mb={1}
+          mb={0}
         >
-          <Text fontSize="small" color="gray.700">
-            {formatDate(date)}
-          </Text>
+          <Text color="gray.700">{formatDate(date)}</Text>
           <HStack>
             <Avatar
-              size={"sm"}
-              name="Peter Seitel"
-              src={`${author.replace(/ /g, "")}-avatar.png`}
+              size={"xs"}
+              name={author}
+              src={`/${author.replace(/ /g, "")}-avatar.png`}
             />
             <Text color="gray.700">{author}</Text>
           </HStack>
         </Flex>
-        <Heading size="md" noOfLines={1}>
-          {title}
-        </Heading>
+        {fullPost ? (
+          <Heading size="md">{title}</Heading>
+        ) : (
+          <Heading size="md" noOfLines={1}>
+            {title}
+          </Heading>
+        )}
       </CardHeader>
       <CardBody>
-        <Text noOfLines={3}>{content}</Text>
+        {fullPost ? (
+          <Text>{content}</Text>
+        ) : (
+          <Text noOfLines={4}>{content}</Text>
+        )}
       </CardBody>
 
-      <CardFooter justify="flex-end" flexWrap="wrap">
-        <Button bg={"whitesmoke"}>Read Full Post</Button>
+      <CardFooter justify="flex-end" flexWrap="wrap" pt="1">
+        {fullPost ? (
+          <Link
+            as={ReactRouterLink}
+            to={`/`}
+            textDecoration={"none !important"}
+          >
+            <Button colorScheme="green" variant="outline">
+              Go Back
+            </Button>
+          </Link>
+        ) : (
+          <Link
+            as={ReactRouterLink}
+            to={`/news/${id}`}
+            textDecoration={"none !important"}
+          >
+            <Button colorScheme="green" variant="outline">
+              Read Full Post
+            </Button>
+          </Link>
+        )}
       </CardFooter>
     </Card>
   );

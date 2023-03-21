@@ -77,7 +77,7 @@ function Nav({ forecast, isLoading, hasError }) {
                     <Image
                       boxSize="40px"
                       objectFit="cover"
-                      src="./gl_icon.png"
+                      src="/gl_icon.png"
                       alt="Green Lake Logo"
                     />
                     <Text fontSize={{ base: "20px", md: "2xl" }}>
