@@ -14,8 +14,8 @@ function Weather({ forecast, isLoading, hasError }) {
         Weather Forecast
       </Heading>
       <SimpleGrid
-        spacing={4}
-        templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
+        spacing={3}
+        templateColumns="repeat(auto-fill, minmax(150px, 1fr))"
       >
         {weather ? (
           weather.forecast.forecastday.map((day, index) => {
