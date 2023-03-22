@@ -45,13 +45,14 @@ function LatestNews() {
   }, []);
 
   return (
-    <div className="news">
+    <Stack>
       <Heading as="h4" size="md" mb={3}>
         Latest News
       </Heading>
       <SimpleGrid
         spacing={4}
         templateColumns="repeat(auto-fill, minmax(1fr, 1fr))"
+        minHeight={{ base: "500px", md: "400px" }}
       >
         {news ? (
           news.map((post, index) => {
@@ -86,7 +87,7 @@ function LatestNews() {
           </Button>
         </Link>
       </Stack>
-    </div>
+    </Stack>
   );
 }
 

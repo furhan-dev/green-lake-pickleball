@@ -51,11 +51,11 @@ function WeatherCard({ day }) {
       </CardHeader>
       <CardBody alignItems={"center"} pt={"0"}>
         <Center>
-          <Text mb={"1"} fontSize={"xs"}>
+          <Text mb={"1"} fontSize={"xs"} fontWeight={"medium"}>
             {day.day.condition.text}
           </Text>
         </Center>
-        <Stack px="4" spacing={"0"} fontSize={"xx-small"} color={"GrayText"}>
+        <Stack px="4" spacing={"0"} fontSize={"xx-small"} color={"gray.800"}>
           <Text>Sunrise: {day.astro.sunrise}</Text>
           <Text>Sunset: {day.astro.sunset}</Text>
           <Text>Chance Rain: {day.day.daily_chance_of_rain}%</Text>

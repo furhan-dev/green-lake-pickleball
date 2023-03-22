@@ -31,14 +31,14 @@ function NewsCard({ id, date, author, title, content, fullPost }) {
           fontSize={"xs"}
           mb={1}
         >
-          <Text color="gray.800">{formatDate(date)}</Text>
+          <Text color="gray.900">{formatDate(date)}</Text>
           <HStack>
             <Avatar
               size={"xs"}
               name={author}
               src={`/${author.replace(/ /g, "").toLowerCase()}-avatar.png`}
             />
-            <Text color="gray.800">{author}</Text>
+            <Text color="gray.900">{author}</Text>
           </HStack>
         </Flex>
         {fullPost ? (
