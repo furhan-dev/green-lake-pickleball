@@ -10,7 +10,7 @@ function Weather({ forecast, isLoading, hasError }) {
 
   return (
     <div className="weather">
-      <Heading as="h4" size="md" mb={2}>
+      <Heading as="h4" size="md" mb={3}>
         Weather Forecast
       </Heading>
       <SimpleGrid

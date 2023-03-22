@@ -46,7 +46,7 @@ function LatestNews() {
 
   return (
     <div className="news">
-      <Heading as="h4" size="md" mb={2}>
+      <Heading as="h4" size="md" mb={3}>
         Latest News
       </Heading>
       <SimpleGrid

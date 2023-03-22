@@ -4,7 +4,7 @@ import { Heading, Text } from "@chakra-ui/react";
 function Intro() {
   return (
     <div>
-      <Heading as="h4" size="md" mb={2}>
+      <Heading as="h4" size="md" mb={3}>
         Welcome to Green Lake Pickleball
       </Heading>
       <Text fontSize={"sm"}>
