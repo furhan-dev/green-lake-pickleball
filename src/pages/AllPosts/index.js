@@ -1,29 +1,23 @@
 import React, { useEffect, useState } from "react";
-import {
-  collection,
-  onSnapshot,
-  orderBy,
-  query,
-  limit,
-} from "firebase/firestore";
-import { Heading, SimpleGrid, Text } from "@chakra-ui/react";
-import db from "./../../db";
-import NewsCard from "../NewsCard";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { Heading, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import db from "../../db";
+import NewsCard from "../../components/NewsCard";
 
-function News() {
-  const [news, setNews] = useState([]);
+function AllPosts() {
+  const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     const newsQuery = query(
       collection(db, "latest-news"),
-      orderBy("date", "desc", limit(5))
+      orderBy("date", "desc")
     );
     const unsubscribe = onSnapshot(
       newsQuery,
       (snapshot) => {
-        setNews(snapshot.docs);
+        setPosts(snapshot.docs);
         setIsLoading(false);
       },
       (error) => {
@@ -36,16 +30,16 @@ function News() {
   }, []);
 
   return (
-    <div className="news">
+    <Stack my={2}>
       <Heading as="h4" size="md" mb={2}>
-        Latest News
+        News
       </Heading>
       <SimpleGrid
         spacing={4}
         templateColumns="repeat(auto-fill, minmax(1fr, 1fr))"
       >
-        {news ? (
-          news.map((post, index) => {
+        {posts ? (
+          posts.map((post, index) => {
             return (
               <NewsCard
                 key={index}
@@ -66,8 +60,8 @@ function News() {
           <></>
         )}
       </SimpleGrid>
-    </div>
+    </Stack>
   );
 }
 
-export default News;
+export default AllPosts;

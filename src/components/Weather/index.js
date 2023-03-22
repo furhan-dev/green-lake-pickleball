@@ -10,12 +10,12 @@ function Weather({ forecast, isLoading, hasError }) {
 
   return (
     <div className="weather">
-      <Heading as="h4" size="md" mb={2}>
+      <Heading as="h4" size="md" mb={3}>
         Weather Forecast
       </Heading>
       <SimpleGrid
-        spacing={4}
-        templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
+        spacing={3}
+        templateColumns="repeat(auto-fill, minmax(150px, 1fr))"
       >
         {weather ? (
           weather.forecast.forecastday.map((day, index) => {

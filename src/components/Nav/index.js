@@ -18,6 +18,7 @@ import NavWeather from "../NavWeather";
 
 const Links = [
   { name: "Home", path: "/" },
+  { name: "News", path: "/news" },
   { name: "Schedule", path: "/schedule" },
   { name: "About", path: "/about" },
 ];
@@ -33,6 +34,7 @@ const NavLink = ({ name, path }) => (
     }}
     as={ReactRouterLink}
     to={path}
+    fontSize={"sm"}
   >
     {name}
   </Link>
@@ -64,7 +66,7 @@ function Nav({ forecast, isLoading, hasError }) {
               }}
             />
             <HStack spacing={8} alignItems={"center"}>
-              <Box color={"white"} fontWeight={700} pe={{ base: "0", md: "6" }}>
+              <Box color={"white"} fontWeight={700} pe={{ base: "0", md: "2" }}>
                 <Link
                   as={ReactRouterLink}
                   to={"/"}

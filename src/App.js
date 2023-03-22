@@ -4,7 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Schedule from "./pages/Schedule";
 import About from "./pages/About";
-import News from "./pages/News";
+import SinglePost from "./pages/SinglePost";
+import AllPosts from "./pages/AllPosts";
 import Nav from "./components/Nav";
 import db from "./db";
 import { ChakraProvider, Container } from "@chakra-ui/react";
@@ -16,7 +17,7 @@ function App() {
   const [hasError, setHasError] = useState(false);
   useEffect(() => {
     fetch(
-      `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=47.68167524285481,-122.32830287086277&days=3&aqi=yes&alerts=no`
+      `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=47.68167524285481,-122.32830287086277&days=4&aqi=yes&alerts=no`
     )
       .then((response) => response.json())
       .then(
@@ -49,7 +50,8 @@ function App() {
           />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/about" element={<About />} />
-          <Route path="/news/:id" element={<News />} />
+          <Route path="/news/:id" element={<SinglePost />} />
+          <Route exact path="/news" element={<AllPosts />} />
         </Routes>
       </Container>
     </ChakraProvider>

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
-import db from "./../../db";
+import { Button, Stack } from "@chakra-ui/react";
+import db from "../../db";
 import NewsCard from "../../components/NewsCard";
 
-export default function News() {
+export default function SinglePost() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
@@ -33,7 +35,7 @@ export default function News() {
   }
 
   return (
-    <div className="news">
+    <Stack my={2}>
       {id ? (
         <NewsCard
           id={id}
@@ -46,6 +48,17 @@ export default function News() {
       ) : (
         <></>
       )}
-    </div>
+
+      <Stack direction={"row"} flexWrap={"flex"} justify={"center"} mt="4">
+        <Button
+          onClick={() => navigate(-1)}
+          colorScheme="green"
+          variant="outline"
+          maxW={"120px"}
+        >
+          &larr; Go Back
+        </Button>
+      </Stack>
+    </Stack>
   );
 }
