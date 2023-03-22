@@ -4,7 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Schedule from "./pages/Schedule";
 import About from "./pages/About";
-import News from "./pages/News";
+import SinglePost from "./pages/SinglePost";
+import AllPosts from "./pages/AllPosts";
 import Nav from "./components/Nav";
 import db from "./db";
 import { ChakraProvider, Container } from "@chakra-ui/react";
@@ -49,7 +50,8 @@ function App() {
           />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/about" element={<About />} />
-          <Route path="/news/:id" element={<News />} />
+          <Route path="/news/:id" element={<SinglePost />} />
+          <Route exact path="/news" element={<AllPosts />} />
         </Routes>
       </Container>
     </ChakraProvider>

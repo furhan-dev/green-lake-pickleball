@@ -1,14 +1,14 @@
-import React from 'react'
-import { Stack, Text } from '@chakra-ui/react'
+import React from "react";
+import { Stack, Heading } from "@chakra-ui/react";
 
 function Schedule(props) {
   return (
-    <Stack>
-      <Text>
+    <Stack my={2}>
+      <Heading as="h4" size="md" mb={2}>
         Schedule
-      </Text>
+      </Heading>
     </Stack>
-  )
+  );
 }
 
-export default Schedule
+export default Schedule;

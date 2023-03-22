@@ -58,17 +58,7 @@ function NewsCard({ id, date, author, title, content, fullPost }) {
       </CardBody>
 
       <CardFooter justify="flex-end" flexWrap="wrap" pt="1">
-        {fullPost ? (
-          <Link
-            as={ReactRouterLink}
-            to={`/`}
-            textDecoration={"none !important"}
-          >
-            <Button colorScheme="green" variant="outline">
-              Go Back
-            </Button>
-          </Link>
-        ) : (
+        {fullPost ? null : (
           <Link
             as={ReactRouterLink}
             to={`/news/${id}`}
