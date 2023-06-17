@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { Button, Heading, SimpleGrid, Stack, Text } from "@chakra-ui/react";
-import db from "../../db";
-import NewsCard from "../../components/NewsCard";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+// import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { Button, Heading, SimpleGrid, Stack, Text } from '@chakra-ui/react';
+// import db from '../../db';
+import NewsCard from '../../components/NewsCard';
 
 function AllPosts() {
   const navigate = useNavigate();
@@ -11,25 +11,25 @@ function AllPosts() {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
-  useEffect(() => {
-    const newsQuery = query(
-      collection(db, "latest-news"),
-      orderBy("date", "desc")
-    );
-    const unsubscribe = onSnapshot(
-      newsQuery,
-      (snapshot) => {
-        setPosts(snapshot.docs);
-        setIsLoading(false);
-      },
-      (error) => {
-        console.log(error);
-        setIsLoading(false);
-        setHasError(true);
-      }
-    );
-    return () => unsubscribe();
-  }, []);
+  // useEffect(() => {
+  //   const newsQuery = query(
+  //     collection(db, 'latest-news'),
+  //     orderBy('date', 'desc')
+  //   );
+  //   const unsubscribe = onSnapshot(
+  //     newsQuery,
+  //     (snapshot) => {
+  //       setPosts(snapshot.docs);
+  //       setIsLoading(false);
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //       setIsLoading(false);
+  //       setHasError(true);
+  //     }
+  //   );
+  //   return () => unsubscribe();
+  // }, []);
 
   return (
     <Stack my={2}>
@@ -62,12 +62,12 @@ function AllPosts() {
           <></>
         )}
       </SimpleGrid>
-      <Stack direction={"row"} flexWrap={"flex"} justify={"center"} mt="4">
+      <Stack direction={'row'} flexWrap={'flex'} justify={'center'} mt="4">
         <Button
           onClick={() => navigate(-1)}
           colorScheme="green"
           variant="outline"
-          maxW={"120px"}
+          maxW={'120px'}
         >
           &larr; Go Back
         </Button>
