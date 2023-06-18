@@ -3,21 +3,24 @@ const Event = require('../models/event');
 
 module.exports = {};
 
-module.exports.create = async (eventObj) => {
+module.exports.create = async (userId, eventObj) => {
   try {
-    return await Event.create(eventObj);
+    return await Event.create({ createdBy: userId, ...eventObj });
   } catch (e) {
     throw new BadDataError('Create event failed!');
   }
 };
 
-module.exports.updateById = async (eventId, newEventObj) => {
+module.exports.updateById = async (userId, eventId, newEventObj) => {
   if (!mongoose.Types.ObjectId.isValid(eventId)) {
     return false;
   }
 
   try {
-    await Event.updateOne({ _id: eventId }, newEventObj).lean();
+    await Event.updateOne(
+      { _id: eventId },
+      { modifiedBy: userId, ...newEventObj }
+    ).lean();
     return true;
   } catch (e) {
     throw new BadDataError(`Updating event: ${eventId} failed!`);
