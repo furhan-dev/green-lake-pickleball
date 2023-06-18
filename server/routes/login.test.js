@@ -2,7 +2,7 @@ const request = require('supertest');
 var jwt = require('jsonwebtoken');
 
 const server = require('../server');
-const testUtils = require('../test-utils');
+const testUtils = require('../utils/test-utils');
 
 const User = require('../models/user');
 
