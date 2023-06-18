@@ -2,9 +2,16 @@ const { Router } = require('express');
 const router = Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const yup = require('yup');
 
 const userDAO = require('../daos/user');
 const { secret, isLoggedIn } = require('../middleware/auth');
+
+const userSchema = yup.object({
+  username: yup.string().required(),
+  email: yup.string().required(),
+  password: yup.string().required(),
+});
 
 // Login
 router.post('/', async (req, res, next) => {
@@ -28,6 +35,7 @@ router.post('/', async (req, res, next) => {
       const token = jwt.sign(
         {
           _id: savedUser._id,
+          username: savedUser.username,
           email: savedUser.email,
           roles: savedUser.roles,
         },
@@ -45,17 +53,14 @@ router.post('/', async (req, res, next) => {
 
 // Sign up
 router.post('/signup', async (req, res, next) => {
+  const user = req.body;
   try {
-    const user = req.body;
-    if (
-      !user ||
-      JSON.stringify(user) === '{}' ||
-      !user.email ||
-      !user.password
-    ) {
-      return res.status(400).send('User email and password are required!');
-    }
+    await userSchema.validate(user, { abortEarly: false });
+  } catch (err) {
+    return res.status(400).json(err.errors);
+  }
 
+  try {
     const existingUser = await userDAO.getUser(user.email);
     if (existingUser) {
       return res.status(409).send('A user with that email already exists!');
@@ -63,6 +68,7 @@ router.post('/signup', async (req, res, next) => {
 
     const hashedPassword = await bcrypt.hash(user.password, 10);
     await userDAO.createUser({
+      username: user.username,
       email: user.email,
       password: hashedPassword,
       roles: ['user'],

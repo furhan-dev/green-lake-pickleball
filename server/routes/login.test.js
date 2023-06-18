@@ -14,10 +14,12 @@ describe('/login', () => {
 
   const user0 = {
     email: 'user0@mail.com',
+    username: 'User Alpha',
     password: '123password',
   };
   const user1 = {
     email: 'user1@mail.com',
+    username: 'User Beta',
     password: '456password',
   };
 
@@ -49,12 +51,14 @@ describe('/login', () => {
       it('should return 400 without a password', async () => {
         const res = await request(server).post('/login/signup').send({
           email: user0.email,
+          username: user0.username,
         });
         expect(res.statusCode).toEqual(400);
       });
       it('should return 400 with empty password', async () => {
         const res = await request(server).post('/login/signup').send({
           email: user1.email,
+          username: user1.username,
           password: '',
         });
         expect(res.statusCode).toEqual(400);
