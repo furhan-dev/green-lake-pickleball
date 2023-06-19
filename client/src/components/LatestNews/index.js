@@ -22,26 +22,38 @@ function LatestNews() {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
-  // useEffect(() => {
-  //   const newsQuery = query(
-  //     collection(db, "latest-news"),
-  //     orderBy("date", "desc"),
-  //     limit(2)
-  //   );
-  //   const unsubscribe = onSnapshot(
-  //     newsQuery,
-  //     (snapshot) => {
-  //       setNews(snapshot.docs);
-  //       setIsLoading(false);
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //       setIsLoading(false);
-  //       setHasError(true);
-  //     }
-  //   );
-  //   return () => unsubscribe();
-  // }, []);
+  useEffect(() => {
+    // const newsQuery = query(
+    //   collection(db, 'latest-news'),
+    //   orderBy('date', 'desc'),
+    //   limit(2)
+    // );
+    // const unsubscribe = onSnapshot(
+    //   newsQuery,
+    //   (snapshot) => {
+    //     setNews(snapshot.docs);
+    //     setIsLoading(false);
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //     setIsLoading(false);
+    //     setHasError(true);
+    //   }
+    // );
+    // return () => unsubscribe();
+    const getPosts = async () => {
+      try {
+        const response = await fetch('/posts');
+        setNews(await response.json());
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+        setIsLoading(false);
+        setHasError(true);
+      }
+    };
+    getPosts();
+  }, []);
 
   return (
     <Stack>
@@ -58,11 +70,11 @@ function LatestNews() {
             return (
               <NewsCard
                 key={index}
-                id={post.id}
-                date={post.data().date.toDate()}
-                author={post.data().author}
-                title={post.data().title}
-                content={post.data().content}
+                id={post._id}
+                date={post.date}
+                author={post.userId}
+                title={post.title}
+                content={post.content}
                 fullPost={false}
               ></NewsCard>
             );

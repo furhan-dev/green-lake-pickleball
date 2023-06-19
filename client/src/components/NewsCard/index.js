@@ -1,6 +1,6 @@
-import React from "react";
-import { Link as ReactRouterLink } from "react-router-dom";
-import { DateTime } from "luxon";
+import React from 'react';
+import { Link as ReactRouterLink } from 'react-router-dom';
+import { DateTime } from 'luxon';
 import {
   Avatar,
   Button,
@@ -13,30 +13,30 @@ import {
   HStack,
   Link,
   Text,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 function NewsCard({ id, date, author, title, content, fullPost }) {
   const formatDate = (date) => {
-    return DateTime.fromJSDate(date).toLocaleString({ dateStyle: "full" });
+    return DateTime.fromISO(date).toLocaleString({ dateStyle: 'full' });
   };
   return (
     <Card maxW="container.md">
-      <CardHeader bg={"whitesmoke"} borderTopRadius={"lg"} pt={1} pb={2}>
+      <CardHeader bg={'whitesmoke'} borderTopRadius={'lg'} pt={1} pb={2}>
         <Flex
           flex="1"
           gap="4"
-          justifyContent={"space-between"}
-          align={"center"}
+          justifyContent={'space-between'}
+          align={'center'}
           flexWrap="wrap"
-          fontSize={"xs"}
+          fontSize={'xs'}
           mb={1}
         >
           <Text color="gray.900">{formatDate(date)}</Text>
           <HStack>
             <Avatar
-              size={"xs"}
+              size={'xs'}
               name={author}
-              src={`/${author.replace(/ /g, "").toLowerCase()}-avatar.png`}
+              src={`/${author.replace(/ /g, '').toLowerCase()}-avatar.png`}
             />
             <Text color="gray.900">{author}</Text>
           </HStack>
@@ -49,7 +49,7 @@ function NewsCard({ id, date, author, title, content, fullPost }) {
           </Heading>
         )}
       </CardHeader>
-      <CardBody fontSize={"sm"}>
+      <CardBody fontSize={'sm'}>
         {fullPost ? (
           <Text>{content}</Text>
         ) : (
@@ -62,7 +62,7 @@ function NewsCard({ id, date, author, title, content, fullPost }) {
           <Link
             as={ReactRouterLink}
             to={`/news/${id}`}
-            textDecoration={"none !important"}
+            textDecoration={'none !important'}
           >
             <Button colorScheme="green" variant="outline">
               Read Full Post
