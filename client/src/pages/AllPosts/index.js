@@ -59,7 +59,7 @@ function AllPosts() {
                 key={index}
                 id={post._id}
                 date={post.date}
-                author={post.userId}
+                author={post.author}
                 title={post.title}
                 content={post.content}
                 fullPost={false}

@@ -26,7 +26,7 @@ export default function SinglePost() {
     // });
     const getPostById = async () => {
       try {
-        const response = await fetch(`/posts/${id}`);
+        const response = fetch(`/posts/${id}`);
         setPost(await response.json());
         setIsLoading(false);
       } catch (error) {
@@ -52,7 +52,7 @@ export default function SinglePost() {
         <NewsCard
           id={id}
           date={post.date}
-          author={post.userId}
+          author={post.author}
           title={post.title}
           content={post.content}
           fullPost={true}

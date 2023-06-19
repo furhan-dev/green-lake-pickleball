@@ -38,7 +38,9 @@ function NewsCard({ id, date, author, title, content, fullPost }) {
               name={author}
               src={`/${author.replace(/ /g, '').toLowerCase()}-avatar.png`}
             />
-            <Text color="gray.900">{author}</Text>
+            <Text color="gray.900">
+              {author.charAt(0).toUpperCase() + author.slice(1)}
+            </Text>
           </HStack>
         </Flex>
         {fullPost ? (

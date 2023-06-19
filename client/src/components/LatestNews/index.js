@@ -43,7 +43,7 @@ function LatestNews() {
     // return () => unsubscribe();
     const getPosts = async () => {
       try {
-        const response = await fetch('/posts');
+        const response = await fetch('/posts?perPage=2');
         setNews(await response.json());
         setIsLoading(false);
       } catch (error) {
@@ -72,7 +72,7 @@ function LatestNews() {
                 key={index}
                 id={post._id}
                 date={post.date}
-                author={post.userId}
+                author={post.author}
                 title={post.title}
                 content={post.content}
                 fullPost={false}
