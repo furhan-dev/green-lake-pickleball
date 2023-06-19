@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const secret = 'my super secret';
+const secret = process.env.JWT_SECRET_KEY || 'my super secret';
 
 const isLoggedIn = async (req, res, next) => {
   let token = req.headers.authorization;
