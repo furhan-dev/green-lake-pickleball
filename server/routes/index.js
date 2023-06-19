@@ -3,6 +3,6 @@ const router = Router();
 
 router.use('/login', require('./login'));
 router.use('/posts', require('./posts'));
-// router.use('/orders', require('./orders'));
+router.use('/schedule', require('./schedule'));
 
 module.exports = router;

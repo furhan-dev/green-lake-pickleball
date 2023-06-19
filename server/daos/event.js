@@ -5,7 +5,13 @@ module.exports = {};
 
 module.exports.create = async (userId, eventObj) => {
   try {
-    return await Event.create({ createdBy: userId, ...eventObj });
+    const { start, end } = eventObj;
+    return await Event.create({
+      createdBy: userId,
+      start: new Date(start),
+      end: new Date(end),
+      ...eventObj,
+    });
   } catch (e) {
     throw new BadDataError('Create event failed!');
   }
@@ -42,10 +48,11 @@ module.exports.getById = async (eventId) => {
 module.exports.getByDateRange = async (startDate, endDate) => {
   try {
     return await Event.find({
-      $and: [{ start: { $gte: startDate } }, { end: { $lte: endDate } }],
+      start: { $gte: startDate },
+      end: { $lte: endDate },
     }).lean();
   } catch (e) {
-    throw new Error(`Getting events by date range failed!`);
+    throw new Error(`Getting events by date range failed! ${e}`);
   }
 };
 

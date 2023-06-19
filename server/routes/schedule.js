@@ -1,4 +1,6 @@
 const { Router } = require('express');
+const { DateTime } = require('luxon');
+
 const router = Router();
 const yup = require('yup');
 
@@ -7,8 +9,8 @@ const { isLoggedIn, isAdmin } = require('../middleware/auth');
 
 const eventSchema = yup.object({
   name: yup.string().required(),
-  start: yup.date().required(),
-  end: yup.date().required(),
+  start: yup.string().required(),
+  end: yup.string().required(),
   notes: yup.string().optional(),
 });
 
@@ -22,7 +24,11 @@ router.post('/', isLoggedIn, isAdmin, async (req, res, next) => {
   }
 
   try {
-    const savedEvent = await eventDAO.create(req.user._id, event);
+    const savedEvent = await eventDAO.create(req.user._id, {
+      ...event,
+      start: new Date(event.start),
+      end: new Date(event.end),
+    });
     res.json(savedEvent);
   } catch (e) {
     if (e.message.includes('duplicate')) {
@@ -32,13 +38,23 @@ router.post('/', isLoggedIn, isAdmin, async (req, res, next) => {
   }
 });
 
-// Read - all event
+// Read - events by date range
 router.get('/', async (req, res, next) => {
   try {
-    let { page, perPage } = req.query;
-    page = page ? Number(page) : 0;
-    perPage = perPage ? Number(perPage) : 10;
-    const events = await eventDAO.getAll(page, perPage);
+    let { start, end } = req.query;
+    let events;
+    if (start) {
+      if (!end) {
+        end = new Date(start);
+        end.setDate(end.getDate() + 7);
+      }
+      events = await eventDAO.getByDateRange(new Date(start), new Date(end));
+    } else {
+      let { page, perPage } = req.query;
+      page = page ? Number(page) : 0;
+      perPage = perPage ? Number(perPage) : 10;
+      events = await eventDAO.getAll(page, perPage);
+    }
     res.json(events);
   } catch (e) {
     next(e);
@@ -59,20 +75,6 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-// Read - events by date range
-router.get('/', async (req, res, next) => {
-  try {
-    let { start, end } = req.query;
-    start = start ? Date(start) : new Date();
-    // set end to 1 week after start by default
-    end = end ? Date(end) : new Date(start.getDate() + 7);
-    const events = await eventDAO.getByDateRange(start, end);
-    res.json(events);
-  } catch (e) {
-    next(e);
-  }
-});
-
 // Update
 router.put('/:id', isLoggedIn, isAdmin, async (req, res, next) => {
   const eventId = req.params.id;
@@ -84,9 +86,11 @@ router.put('/:id', isLoggedIn, isAdmin, async (req, res, next) => {
   }
 
   try {
-    const success = await eventDAO.updateById(eventId, {
-      modifiedBy: req.user._id,
+    const success = await eventDAO.updateById(req.user._id, eventId, {
       ...event,
+      modifiedBy: req.user._id,
+      start: new Date(event.start),
+      end: new Date(event.end),
     });
     res.sendStatus(success ? 200 : 400);
   } catch (e) {
