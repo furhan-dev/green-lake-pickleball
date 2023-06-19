@@ -12,19 +12,31 @@ export default function SinglePost() {
   const [hasError, setHasError] = useState(false);
   const [post, setPost] = useState([]);
 
-  // useEffect(() => {
-  //   const entryRef = doc(db, 'latest-news', id);
-  //   getDoc(entryRef).then((docSnap) => {
-  //     setIsLoading(false);
+  useEffect(() => {
+    // const entryRef = doc(db, 'latest-news', id);
+    // getDoc(entryRef).then((docSnap) => {
+    //   setIsLoading(false);
 
-  //     if (docSnap.exists()) {
-  //       setPost(docSnap.data());
-  //     } else {
-  //       console.log('No such document!');
-  //       setHasError(true);
-  //     }
-  //   });
-  // }, [id]);
+    //   if (docSnap.exists()) {
+    //     setPost(docSnap.data());
+    //   } else {
+    //     console.log('No such document!');
+    //     setHasError(true);
+    //   }
+    // });
+    const getPostById = async () => {
+      try {
+        const response = fetch(`/posts/${id}`);
+        setPost(await response.json());
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+        setIsLoading(false);
+        setHasError(true);
+      }
+    };
+    getPostById();
+  }, [id]);
 
   if (isLoading) {
     return <p>loading...</p>;
@@ -39,7 +51,7 @@ export default function SinglePost() {
       {id ? (
         <NewsCard
           id={id}
-          date={post.date.toDate()}
+          date={post.date}
           author={post.author}
           title={post.title}
           content={post.content}

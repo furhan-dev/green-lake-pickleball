@@ -30,18 +30,45 @@ module.exports.getById = async (postId) => {
   }
 
   try {
-    return await Post.findOne({ _id: postId }).lean();
+    // return await Post.findOne({ _id: postId }).lean();
+    return await Post.aggregate([
+      { $match: { _id: new mongoose.Types.ObjectId(postId) } },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'userId',
+          foreignField: '_id',
+          as: 'user',
+        },
+      },
+      { $project: { author: '$user.username', title: 1, content: 1, date: 1 } },
+      { $unwind: '$author' },
+    ]);
   } catch (e) {
-    throw new Error(`Getting post: ${postId} failed!`);
+    throw new Error(`Getting post: ${e} failed!`);
   }
 };
 
 module.exports.getAll = async (page, perPage) => {
   try {
-    return await Post.find()
-      .limit(perPage)
-      .skip(perPage * page)
-      .lean();
+    return await Post.aggregate([
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'userId',
+          foreignField: '_id',
+          as: 'user',
+        },
+      },
+      { $project: { author: '$user.username', title: 1, content: 1, date: 1 } },
+      { $unwind: '$author' },
+      { $limit: perPage },
+      { $skip: perPage * page },
+    ]);
+    // return await Post.find()
+    //   .limit(perPage)
+    //   .skip(perPage * page)
+    //   .lean();
   } catch (e) {
     throw new Error('Getting all posts failed!');
   }
