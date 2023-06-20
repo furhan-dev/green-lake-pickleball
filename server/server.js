@@ -3,8 +3,6 @@ const path = require('path');
 const { clog } = require('./middleware/clog');
 const routes = require('./routes');
 
-const PORT = process.env.PORT || 3001;
-
 const server = express();
 
 // Import custom middleware, "cLog"

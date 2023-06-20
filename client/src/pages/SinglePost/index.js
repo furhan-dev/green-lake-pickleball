@@ -13,22 +13,16 @@ export default function SinglePost() {
   const [post, setPost] = useState([]);
 
   useEffect(() => {
-    // const entryRef = doc(db, 'latest-news', id);
-    // getDoc(entryRef).then((docSnap) => {
-    //   setIsLoading(false);
-
-    //   if (docSnap.exists()) {
-    //     setPost(docSnap.data());
-    //   } else {
-    //     console.log('No such document!');
-    //     setHasError(true);
-    //   }
-    // });
+    let active = true;
     const getPostById = async () => {
       try {
-        const response = fetch(`/posts/${id}`);
-        setPost(await response.json());
-        setIsLoading(false);
+        const response = await fetch(`/api/posts/${id}`);
+        if (active) {
+          const data = await response.json();
+          console.log(data);
+          setPost(data);
+          setIsLoading(false);
+        }
       } catch (error) {
         console.log(error);
         setIsLoading(false);
@@ -36,6 +30,9 @@ export default function SinglePost() {
       }
     };
     getPostById();
+    return () => {
+      active = false;
+    };
   }, [id]);
 
   if (isLoading) {

@@ -41,11 +41,16 @@ function LatestNews() {
     //   }
     // );
     // return () => unsubscribe();
+    let active = true;
     const getPosts = async () => {
       try {
-        const response = await fetch('/posts?perPage=2');
-        setNews(await response.json());
-        setIsLoading(false);
+        const response = await fetch('/api/posts?perPage=2');
+        const data = await response.json();
+        if (active) {
+          console.log(data);
+          setNews(data);
+          setIsLoading(false);
+        }
       } catch (error) {
         console.log(error);
         setIsLoading(false);
@@ -53,7 +58,18 @@ function LatestNews() {
       }
     };
     getPosts();
+    return () => {
+      active = false;
+    };
   }, []);
+
+  if (isLoading) {
+    return <p>loading...</p>;
+  }
+
+  if (hasError) {
+    return <p>Has error!</p>;
+  }
 
   return (
     <Stack>
@@ -67,6 +83,7 @@ function LatestNews() {
       >
         {news ? (
           news.map((post, index) => {
+            console.log(`each post: ${JSON.stringify(post)}`);
             return (
               <NewsCard
                 key={index}

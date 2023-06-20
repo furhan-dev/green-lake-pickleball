@@ -1,11 +1,10 @@
 const { Router } = require('express');
-const { DateTime } = require('luxon');
 
 const router = Router();
 const yup = require('yup');
 
-const eventDAO = require('../daos/event');
-const { isLoggedIn, isAdmin } = require('../middleware/auth');
+const eventDAO = require('../../daos/event');
+const { isLoggedIn, isAdmin } = require('../../middleware/auth');
 
 const eventSchema = yup.object({
   name: yup.string().required(),

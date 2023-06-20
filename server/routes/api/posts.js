@@ -2,8 +2,8 @@ const { Router } = require('express');
 const router = Router();
 const yup = require('yup');
 
-const postDAO = require('../daos/post');
-const { isLoggedIn, isAdmin } = require('../middleware/auth');
+const postDAO = require('../../daos/post');
+const { isLoggedIn, isAdmin } = require('../../middleware/auth');
 
 const postSchema = yup.object({
   title: yup.string().required(),
