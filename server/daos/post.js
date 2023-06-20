@@ -64,11 +64,8 @@ module.exports.getAll = async (page, perPage) => {
       { $unwind: '$author' },
       { $limit: perPage },
       { $skip: perPage * page },
+      { $sort: { date: -1 } },
     ]);
-    // return await Post.find()
-    //   .limit(perPage)
-    //   .skip(perPage * page)
-    //   .lean();
   } catch (e) {
     throw new Error('Getting all posts failed!');
   }
