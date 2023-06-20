@@ -12,23 +12,6 @@ function AllPosts() {
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    // const newsQuery = query(
-    //   collection(db, 'latest-news'),
-    //   orderBy('date', 'desc')
-    // );
-    // const unsubscribe = onSnapshot(
-    //   newsQuery,
-    //   (snapshot) => {
-    //     setPosts(snapshot.docs);
-    //     setIsLoading(false);
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //     setIsLoading(false);
-    //     setHasError(true);
-    //   }
-    // );
-    // return () => unsubscribe();
     const getPosts = async () => {
       try {
         const response = await fetch('/api/posts');

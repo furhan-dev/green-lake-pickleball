@@ -23,31 +23,12 @@ function LatestNews() {
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    // const newsQuery = query(
-    //   collection(db, 'latest-news'),
-    //   orderBy('date', 'desc'),
-    //   limit(2)
-    // );
-    // const unsubscribe = onSnapshot(
-    //   newsQuery,
-    //   (snapshot) => {
-    //     setNews(snapshot.docs);
-    //     setIsLoading(false);
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //     setIsLoading(false);
-    //     setHasError(true);
-    //   }
-    // );
-    // return () => unsubscribe();
     let active = true;
     const getPosts = async () => {
       try {
         const response = await fetch('/api/posts?perPage=2');
         const data = await response.json();
         if (active) {
-          console.log(data);
           setNews(data);
           setIsLoading(false);
         }

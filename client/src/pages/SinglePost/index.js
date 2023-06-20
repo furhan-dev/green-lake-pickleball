@@ -19,8 +19,7 @@ export default function SinglePost() {
         const response = await fetch(`/api/posts/${id}`);
         if (active) {
           const data = await response.json();
-          console.log(data);
-          setPost(data);
+          setPost(data[0]);
           setIsLoading(false);
         }
       } catch (error) {
