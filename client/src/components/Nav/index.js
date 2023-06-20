@@ -13,6 +13,7 @@ import {
   Stack,
   Text,
   Show,
+  Center,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import NavWeather from '../NavWeather';
@@ -36,8 +37,9 @@ const NavLink = ({ name, path }) => (
     as={ReactRouterLink}
     to={path}
     fontSize={{ base: 'lg', md: 'sm' }}
+    w={'100%'}
   >
-    {name}
+    <Center>{name}</Center>
   </Link>
 );
 
