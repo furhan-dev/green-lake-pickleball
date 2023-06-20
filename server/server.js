@@ -14,14 +14,14 @@ server.use(clog);
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
+server.use(routes);
+
 if (process.env.NODE_ENV === 'production') {
   server.use(express.static(path.join(__dirname, '../client/build')));
 }
 
-server.get('/', (req, res) => {
+server.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
-
-server.use(routes);
 
 module.exports = server;
