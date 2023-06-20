@@ -12,6 +12,7 @@ import {
   useColorModeValue,
   Stack,
   Text,
+  Show,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import NavWeather from '../NavWeather';
@@ -55,14 +56,15 @@ function Nav({ forecast, isLoading, hasError }) {
         <Container maxW={'container.md'} px={{ base: '0', md: '2' }}>
           <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
             <IconButton
-              size={'md'}
+              size={'lg'}
               icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
               aria-label={'Open Menu'}
               display={{ md: 'none' }}
               onClick={isOpen ? onClose : onOpen}
-              bg={'green.700'}
+              color={'white'}
+              bg={'forestgreen'}
               _hover={{
-                bg: 'green.700',
+                bg: 'forestgreen',
               }}
             />
             <HStack spacing={8} alignItems={'center'}>
@@ -82,9 +84,14 @@ function Nav({ forecast, isLoading, hasError }) {
                       src="/gl_icon.png"
                       alt="Green Lake Logo"
                     />
-                    <Text fontSize={{ base: '20px', md: 'xl' }}>
-                      Green Lake Pickleball
-                    </Text>
+                    <Show above="md">
+                      <Text fontSize={{ base: '20px', md: 'xl' }}>
+                        Green Lake Pickleball
+                      </Text>
+                    </Show>
+                    <Show below="md">
+                      <Text fontSize={'4xl'}>GLP</Text>
+                    </Show>
                   </HStack>
                 </Link>
               </Box>
