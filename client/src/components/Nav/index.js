@@ -13,6 +13,7 @@ import {
   Stack,
   Text,
   Show,
+  Center,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import NavWeather from '../NavWeather';
@@ -27,17 +28,28 @@ const Links = [
 const NavLink = ({ name, path }) => (
   <Link
     px={2}
-    py={1}
-    rounded={'md'}
+    py={{ base: 1, md: 0 }}
+    rounded={{ base: 'md', md: '0' }}
+    border={{ base: '2px', md: '0' }}
+    borderColor={'forestgreen'}
     _hover={{
-      textDecoration: 'none',
-      bg: useColorModeValue('green.700', 'green.700'),
+      textDecoration: { base: 'none', md: 'underline' },
+      textDecorationColor: { md: 'greenyellow' },
+      textDecorationThickness: '2px !important',
+      textUnderlineOffset: '4px',
+
+      // bg: useColorModeValue('green.700', 'green.700'),
+      border: { base: '2px', md: '0' },
+      // borderBottom: { base: '0', md: '2px' },
+      borderColor: 'greenyellow',
+      borderBottom: { md: '2px', color: 'greenyellow' },
     }}
     as={ReactRouterLink}
     to={path}
     fontSize={{ base: 'lg', md: 'sm' }}
+    w={'100%'}
   >
-    {name}
+    <Center>{name}</Center>
   </Link>
 );
 
