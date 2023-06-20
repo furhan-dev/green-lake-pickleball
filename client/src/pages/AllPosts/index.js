@@ -31,7 +31,7 @@ function AllPosts() {
     // return () => unsubscribe();
     const getPosts = async () => {
       try {
-        const response = await fetch('/posts');
+        const response = await fetch('/api/posts');
         setPosts(await response.json());
         setIsLoading(false);
       } catch (error) {
