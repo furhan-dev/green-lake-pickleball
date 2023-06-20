@@ -2,6 +2,7 @@ const request = require('supertest');
 
 const server = require('../../server');
 const testUtils = require('../../utils/test-utils');
+const jwt = require('jsonwebtoken');
 
 const User = require('../../models/user');
 const Post = require('../../models/post');
@@ -16,18 +17,13 @@ describe('/posts', () => {
     title: 'Post One',
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices neque ornare aenean euismod. Congue nisi vitae suscipit tellus mauris a diam maecenas sed. Cursus sit amet dictum sit amet. Mus mauris vitae ultricies leo integer malesuada nunc vel risus. Congue nisi vitae suscipit tellus mauris a. Rutrum tellus pellentesque eu tincidunt. In hendrerit gravida rutrum quisque. Pretium aenean pharetra magna ac placerat vestibulum lectus. Consectetur lorem donec massa sapien faucibus et. Nulla pellentesque dignissim enim sit amet venenatis urna cursus. Mattis aliquam faucibus purus in massa tempor nec. Volutpat commodo sed egestas egestas fringilla.',
+    date: '2023-03-21T06:19:39.123Z',
   };
   const post1 = {
     title: 'Second Post',
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et tortor consequat id porta nibh venenatis. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus.',
-  };
-
-  const expectedPost0 = {
-    date: () => new Date('2023-03-21T10:10:10Z'),
-  };
-  const expectedPost1 = {
-    date: () => new Date('2023-06-25T12:12:12Z'),
+    date: '2023-06-14T06:19:39.123Z',
   };
 
   describe('Before login', () => {
@@ -46,28 +42,70 @@ describe('/posts', () => {
     });
     describe.each([post0, post1])('GET /:id post %#', (post) => {
       let originalPost;
+      const user = {
+        email: 'user@mail.com',
+        password: '678password',
+        username: 'admin poster',
+      };
+      let adminToken;
+      let userId;
+      let postId;
       beforeEach(async () => {
-        const res = await request(server).post('/api/posts').send(post);
-        originalPost = res.body;
+        await request(server).post('/api/login/signup').send(user);
+        await User.updateOne(
+          { email: user.email },
+          { $push: { roles: 'admin' } }
+        );
+        const res0 = await request(server).post('/api/login').send(user);
+        adminToken = res0.body.token;
+        userId = jwt.decode(adminToken)._id;
+        const res = await request(server)
+          .post('/api/posts')
+          .set('Authorization', 'Bearer ' + adminToken)
+          .send(post);
+        postId = res.body._id;
       });
       it('should send 200 to everyone and return post', async () => {
-        const res = await request(server)
-          .get(`/api/posts/${originalPost._id}`)
-          .send();
+        const res = await request(server).get(`/api/posts/${postId}`).send();
         expect(res.statusCode).toEqual(200);
-        expect(res.body).toMatchObject(originalPost);
+        expect(res.body).toMatchObject([
+          {
+            ...post,
+            author: user.username,
+          },
+        ]);
       });
     });
     describe('GET /', () => {
       let posts;
+      const user = {
+        email: 'user@mail.com',
+        password: '678password',
+        username: 'admin poster',
+      };
+      let adminToken;
+      let userId;
       beforeEach(async () => {
-        posts = (await Post.insertMany([post0, post1])).map((i) => i.toJSON());
+        await request(server).post('/api/login/signup').send(user);
+        await User.updateOne(
+          { email: user.email },
+          { $push: { roles: 'admin' } }
+        );
+        const res1 = await request(server).post('/api/login').send(user);
+        adminToken = res1.body.token;
+        userId = jwt.decode(adminToken)._id;
+        posts = (
+          await Post.insertMany([
+            { ...post0, userId },
+            { ...post1, userId },
+          ])
+        ).map((i) => i.toJSON());
         posts.forEach((i) => (i._id = i._id.toString()));
       });
       it('should send 200 to everyone and return all posts', async () => {
         const res = await request(server).get('/api/posts/').send();
         expect(res.statusCode).toEqual(200);
-        expect(res.body).toMatchObject(JSON.stringify(posts));
+        expect(res.body).toMatchObject([post0, post1]);
       });
     });
   });
@@ -86,7 +124,7 @@ describe('/posts', () => {
     let adminToken;
     beforeEach(async () => {
       await request(server).post('/api/login/signup').send(user0);
-      const res0 = await request(server).post('/login').send(user0);
+      const res0 = await request(server).post('/api/login').send(user0);
       token0 = res0.body.token;
       await request(server).post('/api/login/signup').send(user1);
       await User.updateOne(
