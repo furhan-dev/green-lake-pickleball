@@ -50,7 +50,9 @@ module.exports.getByDateRange = async (startDate, endDate) => {
     return await Event.find({
       start: { $gte: startDate },
       end: { $lte: endDate },
-    }).lean();
+    })
+      .sort({ start: 1 })
+      .lean();
   } catch (e) {
     throw new Error(`Getting events by date range failed! ${e}`);
   }
@@ -61,6 +63,7 @@ module.exports.getAll = async (page, perPage) => {
     return await Event.find()
       .limit(perPage)
       .skip(perPage * page)
+      .sort({ start: 1 })
       .lean();
   } catch (e) {
     throw new Error('Getting all events failed!');
