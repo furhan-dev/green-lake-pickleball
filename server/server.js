@@ -6,7 +6,9 @@ const routes = require('./routes');
 const server = express();
 
 // Import custom middleware, "cLog"
-server.use(clog);
+if (process.env.NODE_ENV !== 'test') {
+  server.use(clog);
+}
 
 // Middleware for parsing JSON and urlencoded form data
 server.use(express.json());

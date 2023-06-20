@@ -5,10 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "seed": "node seeds/seed.js",
     "watch": "nodemon index.js",
-    "test": "jest --runInBand --coverage --coverageDirectory='coverage'",
-    "tdd": "jest --watch --runInBand"
+    "test": "NODE_ENV=test jest --runInBand --coverage --coverageDirectory='coverage'",
+    "tdd": "NODE_ENV=test jest --watch --runInBand"
   },
   "author": "",
   "license": "ISC",
