@@ -35,7 +35,7 @@ const NavLink = ({ name, path }) => (
     }}
     as={ReactRouterLink}
     to={path}
-    fontSize={'sm'}
+    fontSize={{ base: 'lg', md: 'sm' }}
   >
     {name}
   </Link>
@@ -117,8 +117,8 @@ function Nav({ forecast, isLoading, hasError }) {
           </Flex>
 
           {isOpen ? (
-            <Box pb={4} display={{ md: 'none' }}>
-              <Stack as={'nav'} spacing={4}>
+            <Box pb={4} mt={2} display={{ md: 'none' }}>
+              <Stack as={'nav'} spacing={4} alignItems={'center'}>
                 {Links.map((link) => (
                   <NavLink
                     key={link.name}
