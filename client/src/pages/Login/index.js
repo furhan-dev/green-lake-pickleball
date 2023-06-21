@@ -2,16 +2,13 @@ import React from 'react';
 import {
   Stack,
   Heading,
-  Text,
   Flex,
   FormControl,
   FormLabel,
   Input,
   Box,
-  Checkbox,
   Button,
   useColorModeValue,
-  Link,
 } from '@chakra-ui/react';
 
 function Login(props) {
