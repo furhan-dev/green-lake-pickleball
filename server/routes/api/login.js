@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const yup = require('yup');
 
 const userDAO = require('../../daos/user');
-const { secret, isLoggedIn } = require('../../middleware/auth');
+const { secret, expiration, isLoggedIn } = require('../../middleware/auth');
 
 const userSchema = yup.object({
   username: yup.string().required(),
@@ -39,7 +39,8 @@ router.post('/', async (req, res, next) => {
           email: savedUser.email,
           roles: savedUser.roles,
         },
-        secret
+        secret,
+        { expiresIn: expiration }
       );
       res.status(200).json({ token: token });
     } else {
