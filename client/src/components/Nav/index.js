@@ -9,7 +9,6 @@ import {
   IconButton,
   Image,
   useDisclosure,
-  useColorModeValue,
   Stack,
   Text,
   Show,
@@ -37,10 +36,7 @@ const NavLink = ({ name, path }) => (
       textDecorationColor: { md: 'greenyellow' },
       textDecorationThickness: '2px !important',
       textUnderlineOffset: '4px',
-
-      // bg: useColorModeValue('green.700', 'green.700'),
       border: { base: '2px', md: '0' },
-      // borderBottom: { base: '0', md: '2px' },
       borderColor: 'greenyellow',
       borderBottom: { md: '2px', color: 'greenyellow' },
     }}
@@ -59,7 +55,7 @@ function Nav({ forecast, isLoading, hasError }) {
   return (
     <>
       <Box
-        bg={useColorModeValue('forestgreen', 'green.900')}
+        bg={'forestgreen'}
         px={4}
         color={'white'}
         fontFamily={'Lato, sans-serif'}

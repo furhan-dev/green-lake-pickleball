@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const secret = process.env.JWT_SECRET_KEY || 'my super secret';
+const expiration = '2h';
 
 const isLoggedIn = async (req, res, next) => {
   let token = req.headers.authorization;
@@ -26,4 +27,4 @@ const isAdmin = (req, res, next) => {
   }
 };
 
-module.exports = { secret, isLoggedIn, isAdmin };
+module.exports = { secret, expiration, isLoggedIn, isAdmin };
