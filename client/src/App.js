@@ -6,6 +6,7 @@ import Schedule from './pages/Schedule';
 import About from './pages/About';
 import SinglePost from './pages/SinglePost';
 import AllPosts from './pages/AllPosts';
+import Login from './pages/Login';
 import Nav from './components/Nav';
 import { ChakraProvider, Container } from '@chakra-ui/react';
 
@@ -48,6 +49,7 @@ function App() {
           />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/news/:id" element={<SinglePost />} />
           <Route exact path="/news" element={<AllPosts />} />
         </Routes>
